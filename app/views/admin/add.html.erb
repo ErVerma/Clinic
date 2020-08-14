@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>MAHC</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Instyle Fashion HTML Template">
+	<meta name="keywords" content="instyle, fashion, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Favicon -->
+	<link href="assets/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+	<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+ 
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+
+</head>
+<body>
+
+
+  <!-- header section -->
+  <header >
+    <nav class="navbar navbar-expand-md  ">
+                <div class="container">
+                    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item active"><%= link_to "Requests", status_path %></li>                       
+                            <li class="nav-item"><%= link_to "Log out", logout_path %></li>
+                        </ul>                       
+                    </div>
+                </div>
+    </nav>
+  </header>
+  <!-- header section end -->
+  
+  <p class="main-text">Logged In as:<span style="color: red"> Admin</span></p>
+	
+  <div class="row">
+    <div class="col-xs-7 col-sm-7">
+        
+        <h4><center class="main-text">Available Slots</center></h4>
+        <br>
+        <div class="well">         
+            <table class="table table-striped">
+                <tr>
+                  <th>Slot_name</th>               
+                  <th> Options</th>
+                </tr>
+                <% @temp = Doctor.all.order("slot_name ASC")%>
+                <% @temp.each do |slot| %>
+                  <tr>
+                    <td><%= slot.slot_name %></td>                
+                    <td ><%= link_to 'Cancel',delete_path(slot),method: :delete, class:'btn btn-danger' ,data: { confirm: 'Are you sure?' } %></td>
+                    
+                  </tr>
+                <% end %>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-5 col-sm-5">
+      
+      <%= render 'flash_messages' %>
+      <center class="main-text"><h4>Add Slot</h4></center>
+      <br>
+      <div class="well">
+          <%= form_with scope: :doctor, local: true, url:'/add_slot' do |form| %>
+            <% if @doctor.errors.any? %>
+              <div id="error_explanation">
+                <h3>
+                  <%= pluralize(@doctor.errors.count, "error") %> Errors
+                </h3>
+                <ul>
+                  <% @doctor.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="form-group">
+							<%= form.label :Slot_name %>
+							<%= form.text_field :slot_name, class:'form-control' %>
+						</div>
+            <%= form.submit 'Submit', class:'btn btn-primary btn-block' %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'partials/footer' %>
+  
+
+
+
+<!--Table Listing-->
+  
+	
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/main.js"></script>
+
+
+
+	</body>
+</html>

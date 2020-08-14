@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>MAHC</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Instyle Fashion HTML Template">
+	<meta name="keywords" content="instyle, fashion, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Favicon -->
+	<link href="assets/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+
+	<!-- header section -->
+	<header >
+    <nav class="navbar navbar-expand-md  ">
+                <div class="container">
+                    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                        <ul class="nav navbar-nav mr-auto">
+                            <li class="nav-item active"><%= link_to "Requests", status_path %></li> 
+                                <li class="nav-item"><%= link_to 'Add Slot',add_path%></li>                      
+                            <li class="nav-item"><%= link_to "Log out", logout_path %></li>
+                           
+                        </ul>                       
+                    </div>
+                </div>
+    </nav>
+  	</header>
+	<!-- header section end -->
+	<p class="main-text">Logged In as:<span style="color: red"> Admin</span></p>
+	<%= render 'flash_messages' %>
+	<div class="container">
+		
+		<center><h3><b>Patient's Request List</b></h3></center><br>    
+		<div class="well">        
+			<table class="table table-striped">
+				<tr>
+					<!--th>Patient Id</th-->
+					<th>Patient Name</th>
+					<th>Slot Name</th>
+					<th>Date of  Appointment</th>
+					<th>Status</th>
+				</tr>
+				<% temp = Appointment.all %>
+				<% temp.each do |user| %>
+				<tr>
+					<!--td><%= user.pid %></td--> 	
+					<td><%= user.p_name %></td>
+					<td><%= user.slot_name %></td>
+					<td><%= user.doa %></td>
+					<td><%= link_to 'Confirm Request',status_done_path(user) ,
+						data: { confirm: 'Confirm Request and Send Confirmation Mail' } %></td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+	</div>
+	<!--Table Listing-->
+
+	<%= render 'partials/footer' %>
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/main.js"></script>
+
+
+
+	</body>
+</html>

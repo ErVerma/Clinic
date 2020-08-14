@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zxx">
+	<head>
+		<title>MAHC</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Instyle Fashion HTML Template">
+		<meta name="keywords" content="instyle, fashion, html">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Favicon -->
+		<link href="assets/favicon.ico" rel="shortcut icon"/>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+		<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+		<!-- Main Stylesheets -->
+		<link rel="stylesheet" href="css/style.css"/>
+		<style>
+	* {
+	box-sizing: border-box;
+	}
+
+	/* Create two equal columns that floats next to each other */
+	.column {
+	float: left;
+	width: 50%;
+	padding: 10px;
+	
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+	content: "";
+	display: table;
+	clear: both;
+	}
+
+	/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+	@media screen and (max-width: 600px) {
+	.column {
+		width: 100%;
+	}
+	}
+	</style>
+
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	</head>
+	<body>
+		<!-- header section -->
+		<header >
+			<nav class="navbar navbar-expand-md  ">
+						<div class="container">
+							<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+								<ul class="nav navbar-nav mr-auto">							
+									<li class="nav-item"><%= link_to "Log out", logout_path %></li>
+								</ul>                       
+							</div>
+						</div>
+			</nav>
+		</header>
+		<!-- header section end -->  
+
+		<p class="main-text">Logged In as:<span style="color: red"> <%= @buser.name %></span></p>
+
+		<%= render 'flash_messages' %>                    
+		<div class="row">
+			<div class="col-xs-5 col-sm-5">
+				<div class="well">
+					<h1>New Appointment</h1>
+
+					<%= form_with scope: :book_slots, local: true, url:'/book_slot' do |form| %>
+						<ul>
+							<% @appointment.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+							<% end %>
+						</ul>
+
+						<div class="form-group">
+							<%= form.label :Patient_Name %>
+							<%= form.text_field :p_name, class:'form-control' %>
+						</div>
+
+						<div class="form-group">
+							<%= form.label :Date %>
+							<%= form.date_select :doa, class:'form-control' %>
+						</div>
+
+						<div class="form-group">
+							<%= form.label :Slot %>
+							<%= form.collection_select(:slot_name, Doctor.all, :id, :slot_name, {:prompt => 'Select the Slot'}, :selected => @appointment.slot_name , class:'form-control') %>
+						</div>
+						<%= @appointment.slot_name %>
+						
+						<%= submit_tag "Request!", class:'btn btn-primary btn-block'%>
+					<% end %>
+						
+				</div>
+			</div>
+			<div class="col-xs-7 col-sm-7">
+				<div class="well">
+					<h2 class="page-header">Appointments</h2>
+						<table class="table table-striped">
+							<tr>
+								<th>Patient name</th>
+								<th>Date</th>
+								<th>Slot</th>
+								<th colspan="14"></th>
+							</tr>
+							<% @order_user = Appointment.where(:pid => @buser.p_id) %> 
+							<% @order_user.all.each do |slot| %>
+								<tr>
+									<td ><%= slot.p_name %></td>
+									<td ><%= slot.doa %></td>
+									<td ><%= slot.slot_name %></td>												
+									<td ><%= link_to 'Cancel',appointmentdelete_path(slot), class:'btn btn-danger' ,data: { confirm: 'Are you sure?' } %></td>
+								</tr>
+							<% end %>
+						</table>
+					<br>
+				</div>
+			</div>
+		</div>
+		
+
+		<%= render 'partials/footer' %>
+		
+		<!--button type="button" class="btn btn-link"><%= link_to 'Confirm Request','/confirm'%></button>
+		<!--====== Javascripts & Jquery ======-->
+		<script src="app/javascript/jquery-3.2.1.min.js"></script>
+		<script src="app/javascript/bootstrap.min.js"></script>
+		<script src="app/javascript/jquery.slicknav.min.js"></script>
+		<script src="app/javascript/owl.carousel.min.js"></script>
+		<script src="app/javascript/circle-progress.min.js"></script>
+		<script src="app/javascript/main.js"></script>
+
+
+
+	</body>
+</html>

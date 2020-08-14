@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zxx">
+	<head>
+		<title>MAHC</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Instyle Fashion HTML Template">
+		<meta name="keywords" content="instyle, fashion, html">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <!-- header section -->
+        <header >
+            <nav class="navbar navbar-expand-md  ">
+                        <div class="container">
+                            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                                <ul class="nav navbar-nav mr-auto">
+                                    <li class="nav-item active"><%= link_to "Home", home_path %></li>
+                                    <li class="nav-item"><%= link_to "Admin", admin_path %></li>							
+                                    <li class="nav-item"><%= link_to "Log out", logout_path %></li>
+                                </ul>                       
+                            </div>
+                        </div>
+            </nav>
+        </header>
+        <!-- header section end -->  
+
+        <p class="main-text">Logged In as:<span style="color: red"> <%= @buser.name %></span></p>
+
+        <%= render 'flash_messages' %>
+        <div class="well">
+            <h1>New Appointment</h1>
+
+            <%= form_with scope: :book_slots, local: true, url:'/book_slot' do |form| %>
+                <ul>
+                    <% @appointment.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                    <% end %>
+                </ul>
+
+                <div class="form-group">
+                    <%= form.label :Patient_Name %>
+                    <%= form.text_field :p_name, class:'form-control' %>
+                </div>
+
+                <div class="form-group">
+                    <%= form.label :Date %>
+                    <%= form.date_select :doa, class:'form-control' %>
+                </div>
+
+                <div class="form-group">
+                    <%= form.label :Slot %>
+                    <%= form.collection_select(:slot_name, Doctor.all, :id, :slot_name, {:prompt => 'Select the Slot'}, :selected => @appointment.slot_name , class:'form-control') %>
+                </div>
+                <%= @appointment.slot_name %>
+                
+                <%= submit_tag "Request!" %>
+            <% end %>
+                
+
+            <%= link_to 'Back', appointment_path %>
+        </div>
+
+		
+		<!--button type="button" class="btn btn-link"><%= link_to 'Confirm Request','/confirm'%></button>
+		<!--====== Javascripts & Jquery ======-->
+		<script src="app/javascript/jquery-3.2.1.min.js"></script>
+		<script src="app/javascript/bootstrap.min.js"></script>
+		<script src="app/javascript/jquery.slicknav.min.js"></script>
+		<script src="app/javascript/owl.carousel.min.js"></script>
+		<script src="app/javascript/circle-progress.min.js"></script>
+		<script src="app/javascript/main.js"></script>
+
+	</body>
+</div>

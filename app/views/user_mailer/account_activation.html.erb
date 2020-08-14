@@ -1,0 +1,13 @@
+<h1>Activate Your Account</h1>
+<p><%= @greeting %>
+</p>
+
+
+
+<h1>Managing Appointments At Health Center</h1>
+<p>Hi <%= @user.name %>,</p>
+<p>
+Welcome to the Managing Appointments At Health Center! Click on the link below to activate your
+account:
+</p>
+<%= link_to "Activate",edit_account_activation_url(@user.activation_token,email: @user.email) %>

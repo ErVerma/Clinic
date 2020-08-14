@@ -1,0 +1,41 @@
+<h2>Appointment Details</h2>
+
+<p>
+Hello <%= @user.pid %>,
+</p>
+<p>Your Appointment Request for <%=@user.p_name%> Has been confirmed as </p>
+<p>Request Confirmation time : <%= Time.now %></p>
+<p>Appointment Details   : </p>
+<div class="container">            
+  <table class="table table-striped">
+    <thead>
+      <tr align="center">
+        <th align="center">Slot_name</th>
+        <th align="center">Patient_name</th>
+        <th align="center">Date of Appointment</th>
+      
+        
+      </tr>
+    </thead>
+    <tbody>
+    	<% @order_user = Appointment.where(:p_name => @user.p_name) %> 
+    	<% @order_user.all.each do |slot| %>
+     	 <tr>
+            <td align="center"><%= slot.slot_name%></td>
+          <td align="center"><%= slot.p_name%></td>
+    	
+        
+       <td align="center"><%= slot.doa%></td>
+    	
+      	</tr>
+      	<% end %>
+    </tbody>
+  </table>
+</div>
+<!--Table Listing-->
+<div>  
+	
+<p>Click here to <%= link_to "login", 'http://localhost:3000/login' %></p>
+</div>
+<p align>Thankyou</p>
+<p align>-MAHC-</p>

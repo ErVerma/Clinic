@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zxx">
+	<head>
+		<title>MAHC</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Instyle Fashion HTML Template">
+		<meta name="keywords" content="instyle, fashion, html">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Favicon -->
+		<link href="assets/favicon.ico" rel="shortcut icon"/>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+		<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+		<!-- Main Stylesheets -->
+		<link rel="stylesheet" href="css/style.css"/>
+	</head>
+
+	<body>
+
+		<!-- header section -->
+			<%= render 'partials/header' %>
+		<!-- header section end -->
+
+		<%= render 'flash_messages' %>
+
+		<center>
+		<h3>Enter Your Details</h3><br>
+		
+			
+		<!-- forms--> 
+		<div class="container1">
+			<%= form_with scope: :user, local: true, url:'/register' do |form| %>
+				<% if @user.errors.any? %>
+					<div id="error_explanation">
+						<h3>
+							<%= pluralize(@user.errors.count, "error") %> Errors
+						</h3>
+						<ul>
+							<% @user.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+				
+				<div class="form-group">
+					<%= form.text_field :p_id, class:'form-control',placeholder:'UserName' %>
+				</div>
+				<div class="form-group">
+					<%= form.text_field :name, class:'form-control',placeholder:'Full Name' %>
+				</div>
+				<div class="form-group">
+					<%= form.text_field :email, class:'form-control',placeholder:'Email Id' %>
+				</div>
+				<div class="form-group">
+					<%= form.password_field :password, class:'form-control',placeholder:'Password' %>
+				</div>
+				<div class="form-group">
+					<%= form.password_field :confirm_password, class:'form-control',placeholder:'Confirm Password' %>
+				</div>
+				<div class="form-group">
+					<%= form.label :DOB, class:'main-text'%>
+					<%= form.date_field :dob, class:'form-control' %>
+				</div>
+				<div class="form-group">
+					<%= form.label :Gender, class:'main-text'%>
+					<%= form.text_field :gender, class:'form-control' %>
+				</div>			
+				<div class="form-group">
+					<%= form.text_field :phone, class:'form-control',placeholder:'Phone' %>
+				</div>			
+				<div class="form-group">
+					<%= form.text_area :address, class:'form-control',placeholder:'Address' %>
+				</div>
+				
+				<%= form.submit 'Submit', class:'btn btn-lg btn-primary btn-block' %>
+			<% end %>
+		</div>
+		</center>
+
+		<%= render 'partials/footer' %>
+		
+		<!--end -->
+		<!--====== Javascripts & Jquery ======-->
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.slicknav.min.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/circle-progress.min.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>

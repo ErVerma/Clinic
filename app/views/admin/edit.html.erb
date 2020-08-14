@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>MAHC</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Instyle Fashion HTML Template">
+	<meta name="keywords" content="instyle, fashion, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Favicon -->
+	<link href="assets/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+
+	<!-- header section -->
+	<header class="header-section">
+		<div class="header-warp">
+			<!--%= link_to image_tag("logo.png"), home_path %-->
+                           <%= ADMIN%>
+			<ul class="main-menu">
+				<li><%= link_to 'home',home_path%></li>
+				<li><%= link_to 'logout','admin/logout'%></li>
+				<!--<li><%= link_to 'appointment',appointment_path%></li>
+				<li><%= link_to 'cancel',cancel_path%></li>-->
+			</ul>
+		</div>
+	</header>
+	<!-- header section end -->
+	<%= render 'flash_messages' %>
+	
+	<h4><center>Edit Slots</center></h4>
+    <br>
+    <div align="center">
+	<%= form_with model: @edit, local: true do |form| %>
+	<% if @edit.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+        <%= pluralize(@edit.errors.count, "error") %> Errors
+      </h3>
+      <ul>
+        <% @edit.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+  <p>
+    <b>Slot_name </b>
+    &nbsp;&nbsp;&nbsp;
+    <%= form.text_field :slot_name %>
+</p>
+
+
+    <%= form.submit 'Submit'%>
+  </p>
+</p>
+<% end %>
+
+  
+	
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/main.js"></script>
+
+
+
+	</body>
+</html>

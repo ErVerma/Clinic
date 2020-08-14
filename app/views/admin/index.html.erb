@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+	<head>
+		<title>MAHC</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="Instyle Fashion HTML Template">
+		<meta name="keywords" content="instyle, fashion, html">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Favicon -->
+		<link href="assets/favicon.ico" rel="shortcut icon"/>
+
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+		<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+		<!-- Main Stylesheets -->
+		<link rel="stylesheet" href="css/style.css"/>
+
+
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+	</head>
+	<body>
+
+
+		<!-- header section -->
+		<%= render 'partials/header' %>
+		<!-- header section end -->
+
+		<%= render 'flash_messages' %>
+
+		<center>
+			<h3>AdminLogin</h3><br>
+			<div class="container">
+				<%= form_with scope: :adminlogin, local: true, class: 'form-signin', url:'/attempt_login' do |form| %>				
+					<%= form.text_field :adminid, class:'form-control',placeholder:'UserName' %>
+			
+					<%= form.password_field :password, class:'form-control',placeholder:'Password' %> 
+			
+					<%= submit_tag "Login", class:'btn btn-lg btn-primary btn-block'%>
+				<% end %>
+			</div>
+		</center>
+
+		<%= render 'partials/footer' %>
+		
+		<!--====== Javascripts & Jquery ======-->
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.slicknav.min.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/circle-progress.min.js"></script>
+		<script src="js/main.js"></script>
+
+
+
+	</body>
+</html>
